@@ -14,6 +14,7 @@ DELTA = {
 }#練習1
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
+
 def check_bound(rct : pg.Rect) -> tuple[bool, bool]:
     """
     引数：こうかとんRectまたは爆弾Rect
