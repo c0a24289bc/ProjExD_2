@@ -28,15 +28,18 @@ def check_bound(rct : pg.Rect) -> tuple[bool, bool]:
     return yoko, tate
 
 def gameover(screen: pg.Surface) -> None:
-    gg_img = pg.Surface((WIDTH,HEIGHT))
+    gg_img = pg.Surface((WIDTH,HEIGHT)) # 空のSurface
 
+    # 黒い半透明の矩形を描画
     pg.draw.rect(gg_img,(0,0,0),(0,0,WIDTH,HEIGHT))
     gg_img.set_alpha(200)
-    
+
+    # テキストを描画
     font = pg.font.Font(None, 50)
     txt = font.render("Game Over", True, (255, 255, 255))
     gg_img.blit(txt, (470,320))
 
+    # こうかとんの画像を描画
     pp_img = pg.image.load("fig/8.png")
     gg_img.blit(pp_img, (366,300))
     gg_img.blit(pp_img, (732,300))
@@ -54,6 +57,11 @@ def main():
     kk_rct = kk_img.get_rect()
     kk_rct.center = 300, 200
     bb_img = pg.Surface((20,20))
+    for r in range(1, 11):
+        bb_img = pg.Surface((20*r, 20*r))
+        pg.draw.circle(bb_img, (225, 0, 0), (10*r, 10*r), 10*r)
+        bb_img.append(bb_img)
+    bb_accs = [a for a in range(1, 11)]
     pg.draw.circle(bb_img, (255, 0, 0), (10, 10), 10)
     bb_img.set_colorkey((0, 0, 0)) # 黒色を透過色に設定
     bb_rct = bb_img.get_rect() # 爆弾をRect
